@@ -1,9 +1,5 @@
 import openpyxl
 import mysql.connector
-import os
-#-----------------------------------------------------------------------------------------------
-def clear():
-    os.system('cls')
 #-----------------------------------------------------------------------------------------------
 def open_Connection():
     return mysql.connector.connect(user='root', 
@@ -15,25 +11,6 @@ def open_Connection():
 #-----------------------------------------------------------------------------------------------
 def close_Connection(cnx):
     cnx.close()
-#-----------------------------------------------------------------------------------------------
-def checkTables():
-    cnx = open_Connection()
-    dropTables(cnx, 'AAA')
-    createTables(cnx, 'AAA')
-    dropTables(cnx, 'BBB')
-    createTables(cnx, 'BBB')
-#-----------------------------------------------------------------------------------------------
-def createTables(cnx, tableName):
-    stmt = 'CREATE TABLE %s ( Bran varchar(255), Amount varchar(255));'  %tableName
-    cursor = cnx.cursor()
-    cursor.execute(stmt)        
-    cnx.commit()
-#-----------------------------------------------------------------------------------------------
-def dropTables(cnx, tableName):
-    stmt = 'DROP TABLE IF EXISTS %s ;' %tableName
-    cursor = cnx.cursor()
-    cursor.execute(stmt)        
-    cnx.commit()
 #-----------------------------------------------------------------------------------------------
 def add_Info(cnx, tableName, bran, amount):
     
@@ -51,31 +28,25 @@ def loadDataFromFile():
     count = 0
     worksheet = wookbook[sheetnames[0]]
     for i in range(1, worksheet.max_row):
-        add_Info(cnx, 'AAA', worksheet.cell(row=i, column=1).value, worksheet.cell(row=i, column=2).value)
+        add_Info(cnx, 'Report_202', worksheet.cell(row=i, column=1).value, worksheet.cell(row=i, column=2).value)
         count += 1
         if count % 1000 == 0:
-            print('AAA - insert to DB' , count) 
+            print('Report_202 - insert to DB' , count) 
             cnx.commit()
-    print('AAA - insert to DB' , count) 
+    print('Report_202 - insert to DB' , count) 
     cnx.commit()
     count = 0
     worksheet = wookbook[sheetnames[1]]
     for i in range(1, worksheet.max_row):
-        add_Info(cnx, 'BBB', worksheet.cell(row=i, column=1).value, worksheet.cell(row=i, column=2).value)
+        add_Info(cnx, 'Total_GL', worksheet.cell(row=i, column=1).value, worksheet.cell(row=i, column=2).value)
         count += 1
         if count % 1000 == 0:
-            print('BBB - insert to DB' , count) 
+            print('Total_GL - insert to DB' , count) 
             cnx.commit()
-    print('BBB - insert to DB' , count) 
+    print('Total_GL - insert to DB' , count) 
     cnx.commit()
     close_Connection(cnx)
 #-----------------------------------------------------------------------------------------------
+def LoadData():
+    loadDataFromFile()
 #-----------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------
-
-clear()
-print('--- Start Program ---')
-checkTables()
-loadDataFromFile()
-print('--- End of Program ---')
