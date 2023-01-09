@@ -13,7 +13,6 @@ def close_Connection(cnx):
     cnx.close()
 #-----------------------------------------------------------------------------------------------
 def add_Info(cnx, tableName, bran, amount):
-    
     cursor = cnx.cursor()
     try:
         bran_info = """INSERT INTO %s (Bran, Amount) VALUES ('%s', '%s')""" %(tableName, str(bran), str(amount))
