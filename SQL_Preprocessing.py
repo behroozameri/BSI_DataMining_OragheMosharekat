@@ -38,6 +38,11 @@ def checkTables():
     dropTables(cnx, 'Total_GL')
     dropTables(cnx, 'CTE_0')
     dropTables(cnx, 'CTE_1')
+    dropTables(cnx, 'CTE_2')
+    dropTables(cnx, 'CTE_3')
+    dropTables(cnx, 'CTE_4')
+    dropTables(cnx, 'CTE_5')
+    dropTables(cnx, 'CTE_6')
     createTables(cnx)    
 #-----------------------------------------------------------------------------------------------
 def createTables(cnx):
@@ -49,11 +54,31 @@ def createTables(cnx):
     cursor = cnx.cursor()
     cursor.execute(stmt)      
     cnx.commit()
-    stmt = 'CREATE TABLE CTE_0 (Bran bigint, sumAmount bigint);'
+    stmt = 'CREATE TABLE CTE_0 (Bran bigint, SumAmount bigint);'
     cursor = cnx.cursor()
     cursor.execute(stmt)      
     cnx.commit()
     stmt = 'CREATE TABLE CTE_1 (Bran bigint, Amount bigint);'
+    cursor = cnx.cursor()
+    cursor.execute(stmt)      
+    cnx.commit()
+    stmt = 'CREATE TABLE CTE_2 (Bran bigint, Sum_202 bigint, Amount_GL bigint, Sum_202_GL bigint);'
+    cursor = cnx.cursor()
+    cursor.execute(stmt)      
+    cnx.commit()
+    stmt = 'CREATE TABLE CTE_3 (Bran bigint);'
+    cursor = cnx.cursor()
+    cursor.execute(stmt)      
+    cnx.commit()
+    stmt = 'CREATE TABLE CTE_4 (Bran bigint);'
+    cursor = cnx.cursor()
+    cursor.execute(stmt)      
+    cnx.commit()
+    stmt = 'CREATE TABLE CTE_5 (Bran bigint, SumAmount bigint);'
+    cursor = cnx.cursor()
+    cursor.execute(stmt)      
+    cnx.commit()
+    stmt = 'CREATE TABLE CTE_6 (Bran bigint, Amount bigint);'
     cursor = cnx.cursor()
     cursor.execute(stmt)      
     cnx.commit()
